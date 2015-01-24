@@ -1,0 +1,12 @@
+.form-group, .row {
+	margin-right:0px !important;
+	margin-left:15px !important
+}
+img#logo {
+	z-index:-50;
+	position:absolute;
+	opacity:0.1;
+	top:50px;
+	left:50px;
+	transform:rotate(-0.01turn);
+}
