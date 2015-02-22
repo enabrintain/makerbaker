@@ -19,7 +19,7 @@ echo($template["header"]);
 			} else if ( $_REQUEST["status"] == "loginFailed" ) {
 				echo("You didn't type your old password correctly, so I couldn't change your password.");
 			} else {
-				echo('Something went horribly, horribly wrong. Please email <a href"mailto:netadmin@lists.makerslocal.org">the netadmins.</a>');
+				echo('Something went horribly, horribly wrong. Please email <a href="mailto:netadmin@lists.makerslocal.org">the netadmins.</a>');
 			}
 		?></p>
         </div>
