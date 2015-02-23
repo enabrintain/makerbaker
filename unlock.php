@@ -1,6 +1,13 @@
 <?php require_once("app.php");
 $auth = new Authenticator();
 $auth->requireAuthenticatedUser();
+
+if ( 0 !== strpos($_SERVER["REMOTE_ADDR"],$config["local"]) ) {
+	//you have to be at the shop to unlock the door
+	header("Location: unlock_done.php?status=notatshop");
+	die("you have to be at the shop to unlock the door.");
+}
+
 echo($template["header"]);
 ?>
 

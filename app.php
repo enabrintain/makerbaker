@@ -21,6 +21,7 @@ $config["app_name"] = "Maker Baker";
 $config["app_path"] = ".";
 $config["error_text"] = " Contact the netadmins at netadmin@lists.makerslocal.org for help with this.";
 $config["timeout"] = 60;
+$config["local"] = "10.56."; //if your IP starts with this, you're at the shop
 
 //templates
 $template = array();
