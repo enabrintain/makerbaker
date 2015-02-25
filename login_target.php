@@ -22,7 +22,7 @@ try {
 $auth = new Authenticator();
 $auth->setCurrentUid($uid);
 if ( strlen($_REQUEST["next"]) == 0 ) die(header("Location: ."));
-die(header("Location: " . $_REQUEST["next"]));
+die(header("Location: " . str_replace(array('.', ':'), '' , $_REQUEST["next"])));
 
 //if we made it here something crazy is going on
 die(header("Location: ./?status=unknownError&uid=" . $uid));

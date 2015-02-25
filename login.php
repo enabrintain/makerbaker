@@ -29,7 +29,7 @@ echo($template["header"]);
 			<label for="uid">LDAP uid</label>
 			<input name="uid" type="text" placeholder="hfuller" required <?php
 				if (array_key_exists("uid",$_REQUEST)) {
-					echo(' value="' . $_REQUEST["uid"] . '"');
+					echo(' value="' . urlencode($_REQUEST["uid"]) . '"');
 				}
 				?>>
 		</div>
