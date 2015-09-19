@@ -16,7 +16,14 @@ class Authenticator {
 			}
 		}
 	}
-	
+
+	public function setBoardMember($isMember) {
+		$_SESSION["board"] = $isMember;
+	}
+	public function isBoardMember() {
+		return $_SESSION["board"];
+	}
+
 	public function setCurrentUid($uid) {
 		$_SESSION["valid"] = true;
 		$_SESSION["uid"] = $uid;

@@ -21,6 +21,22 @@ try {
 
 $auth = new Authenticator();
 $auth->setCurrentUid($uid);
+$user = $ldap->getUserFromUid($uid);
+function getBoardObject($ldap) {
+	$board_filter = "cn=board";
+	$r = $ldap->search($board_filter, "ou=groups,dc=makerslocal,dc=org");
+	if ( $r["count"] > 0 ) { return $r[0]; }
+	return false;
+}
+$board_group = getBoardObject($ldap);
+$auth->setBoardMember(false);
+for ($i = 0; $i < $board_group["uniquemember"]["count"]; $i+=1) {
+	$board_member = $board_group["uniquemember"][$i];
+	if (strcmp($board_member, $user["dn"])) {
+		continue;
+	}
+	$auth->setBoardMember(true);
+}
 if ( strlen($_REQUEST["next"]) == 0 ) die(header("Location: ."));
 die(header("Location: " . str_replace(array('.', ':'), '' , $_REQUEST["next"])));
 

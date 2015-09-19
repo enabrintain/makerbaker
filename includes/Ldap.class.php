@@ -22,8 +22,8 @@ class Ldap {
 		$this->bound_dn = $bind_dn;
 	}
 	
-	public function search($filter) {
-		$sr=ldap_search($this->ds, LdapInfo::base_dn, $filter);  
+	public function search($filter, $base_dn = LdapInfo::base_dn) {
+		$sr=ldap_search($this->ds, $base_dn, $filter);
 		return(ldap_get_entries($this->ds, $sr));
 	}
 	
