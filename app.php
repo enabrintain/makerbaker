@@ -44,3 +44,92 @@ $template["header"] = '<!DOCTYPE html>
 ';
 $template["footer"] = '';
 
+function getBoardObject($ldap) {
+	$board_filter = "cn=board";
+	$r = $ldap->search($board_filter, "ou=groups,dc=makerslocal,dc=org");
+	if ( $r["count"] > 0 ) { return $r[0]; }
+	return false;
+}
+
+function getNameFromDn($ldap, $dn) {
+	$r = $ldap->search(explode(',', $dn)[0]);
+	if ( $r["count"] == 0 ) { return false; }
+	$user = $r[0];
+	return $user['cn'][0];
+}
+
+function getBoardList() {
+	try {
+		$ldap = new Ldap();
+	} catch (ErrorException $e) {
+		//wrong login
+		die('LDAP connection failed');
+	}
+	$board_members = array();
+	$board_group = getBoardObject($ldap);
+	for ($i = 0; $i < $board_group["uniquemember"]["count"]; $i+=1) {
+		$board_member = $board_group["uniquemember"][$i];
+		$member_name = getNameFromDn($ldap, $board_member);
+		if ($member_name === false) {
+			return false;
+		}
+		array_push($board_members, $member_name);
+	}
+	return $board_members;
+}
+
+function generateFormInput($name, $type, $label, $input_extra=null) {
+?>
+<div class="form-group">
+	<label class="col-sm-4 x control-label" for="<?php echo($name); ?>"><?php echo($label); ?></label>
+	<div class="col-sm-8">
+<?php
+	if (strcmp($type, "radio") && strcmp($type, "select")) {
+		if (!strcmp($type, "submit")) {
+?>
+		<input type="submit" name="<?php echo($name); ?>" <?php if ($input_extra != null) echo('value="'.$input_extra.'"'); ?> />
+<?php
+		} else if (!strcmp($type, "password")) {
+?>
+		<input class="form-control" type="password" name="<?php echo($name); ?>" <?php if ($input_extra != null) echo('placeholder="'.$input_extra.'"'); ?> />
+<?php
+		} else {
+?>
+		<input class="form-control" type="<?php echo($type); ?>" name="<?php echo($name); ?>"/>
+<?php
+		}
+	} else if (!strcmp($type, "radio")) {
+		foreach ($input_extra as $option) {
+			if (strcmp($option, "other")) {
+?>
+		<input id="<?php echo($type.$name.$option); ?>" type="radio" name="<?php echo($name); ?>">
+			<label for="<?php echo($type.$name.$option); ?>"><?php echo($option) ?></label>
+		</input><br/>
+<?php
+			} else {
+?>
+		<input id="<?php echo($type.$name.$option); ?>" type="radio" name="<?php echo($name); ?>">
+			<label for="<?php echo($type.$name.$option); ?>"><?php echo($option) ?></label>
+			<input class="form-control" type="text" name="<?php echo($name); ?>_other"/>
+		</input><br/>
+<?php
+			}
+		}
+	} else if (!strcmp($type, "select")) {
+?>
+		<select class="form-control" name="<?php echo($name); ?>">
+<?php
+		foreach ($input_extra as $option) {
+?>
+			<option value="<?php echo($option) ?>"><?php echo($option) ?></option>
+<?php
+		}
+?>
+		</select>
+<?php
+	}
+?>
+	</div>
+</div>
+<?php
+}

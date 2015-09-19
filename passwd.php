@@ -21,30 +21,12 @@ echo($template["header"]);
 -->
 
     <form class="form-horizontal" action="passwd_change.php" method="POST">
-	<div class="form-group">
-		<label class="col-sm-4 x control-label" for="old">Your current password</label>
-		<div class="col-sm-8">
-			<input class="form-control" type="password" name="old" placeholder="*****************************">
-		</div>
-	</div>
-	<div class="form-group">
-                <label class="col-sm-4 x control-label" for="new">Your desired password</label>
-                <div class="col-sm-8">
-			<input class="form-control" type="password" name="new" placeholder="*****************************">
-		</div>
-        </div>
-        <div class="form-group">
-                <label class="col-sm-4 x control-label" for="new_confirm">Again</label>
-		<div class="col-sm-8">
-	                <input class="form-control" type="password" name="new_confirm" placeholder="*****************************">
-		</div>
-	</div>
-	<div class="form-group">
-		<label class="col-sm-4 x control-label" for="btn">If you are ready to proceed with this...</label>
-		<div class="col-sm-8">
-			<input type="submit" name="btn" value="Do it">
-		</div>
-        </div>
+<?php
+generateFormInput("old", "password", "Your current password", "*****************************");
+generateFormInput("new", "password", "Your desired password", "*****************************");
+generateFormInput("new_confirm", "password", "Again", "*****************************");
+generateFormInput("btn", "submit", "If you are ready to proceed with this...", "Do it");
+?>
     </form>
 
 </div>
