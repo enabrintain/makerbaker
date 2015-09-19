@@ -24,6 +24,13 @@ class Authenticator {
 		return $_SESSION["board"];
 	}
 
+	public function requireBoardUser() {
+		$this->requireAuthenticatedUser();
+		if ( !$this->isBoardMember() ) {
+			die('Access denied due to insufficient permissions');
+		}
+	}
+
 	public function setCurrentUid($uid) {
 		$_SESSION["valid"] = true;
 		$_SESSION["uid"] = $uid;
