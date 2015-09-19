@@ -44,6 +44,28 @@ $template["header"] = '<!DOCTYPE html>
 ';
 $template["footer"] = '';
 
+$vote_options = array();
+$vote_options['proposal'] = array("Yea", "Nay", "Explicit Abstain", "Passive Abstain");
+$vote_options['formal_complaint'] = array("Yea", "Nay", "Explicit Abstain", "Passive Abstain", "Forced Abstain");
+
+function proposalVotePassed($responses) {
+	$num_yea = count($responses['Yea']);
+	$num_nay = count($responses['Nay']);
+	if ($num_nay > 1 || $num_nay >= $num_yea) {
+		return false;
+	}
+	return true;
+}
+
+function complaintVotePassed($responses) {
+	$num_yea = count($responses['Yea']);
+	$num_nay = count($responses['Nay']);
+	if ($num_nay >= $num_yea) {
+		return false;
+	}
+	return true;
+}
+
 function getBoardObject($ldap) {
 	$board_filter = "cn=board";
 	$r = $ldap->search($board_filter, "ou=groups,dc=makerslocal,dc=org");
@@ -76,6 +98,22 @@ function getBoardList() {
 		array_push($board_members, $member_name);
 	}
 	return $board_members;
+}
+
+function getMemberList() {
+	try {
+		$ldap = new Ldap();
+	} catch (ErrorException $e) {
+		//wrong login
+		die('LDAP connection failed');
+	}
+
+	$results_array = array();
+	$results = $ldap->search("objectclass=Maker");
+	for ($i = 0; $i < $results['count']; $i+=1) {
+		array_push($results_array, $results[$i]);
+	}
+	return $results_array;
 }
 
 function generateFormInput($name, $type, $label, $input_extra=null) {
@@ -132,4 +170,16 @@ function generateFormInput($name, $type, $label, $input_extra=null) {
 	</div>
 </div>
 <?php
+}
+
+function sanitizeName($name) {
+	$name = str_replace(",", "_", $name);
+	$name = str_replace(" ", "_", $name);
+	$name = str_replace("'", "_", $name);
+	$name = str_replace('"', "_", $name);
+	return $name;
+}
+
+function getPendingMembers() {
+	return array("Pending Members Placeholder");
 }
