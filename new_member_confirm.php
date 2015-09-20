@@ -14,8 +14,8 @@ echo($template["header"]);
 
     <form class="form-horizontal" action="new_member_confirm_submit.php" method="POST">
 <?php
-generateFormInput("pending_member", "select", "Pending Member", getPendingMembers());
-generateFormInput("btn", "submit", "Make Active", "Confirm");
+generateFormInput("pending_member", "select", "Pending Member", true, getPendingMembers());
+generateFormInput("btn", "submit", "Make Active", true, "Confirm");
 ?>
     </form>
 

@@ -18,11 +18,11 @@ echo($template["header"]);
 
     <form class="form-horizontal" action="new_member_vote_end_submit.php" method="POST">
 <?php
-generateFormInput("pending_member", "select", "Pending Member", getPendingMembers());
+generateFormInput("pending_member", "select", "Pending Member", true, getPendingMembers());
 foreach ($board_members as $board_member) {
-	generateFormInput(sanitizeName($board_member), "select", $board_member, $vote_options['proposal']);
+	generateFormInput(sanitizeName($board_member), "select", $board_member, true, $vote_options['proposal']);
 }
-generateFormInput("btn", "submit", "Submit vote", "Submit");
+generateFormInput("btn", "submit", "Submit vote", true, "Submit");
 ?>
     </form>
 

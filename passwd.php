@@ -22,10 +22,10 @@ echo($template["header"]);
 
     <form class="form-horizontal" action="passwd_change.php" method="POST">
 <?php
-generateFormInput("old", "password", "Your current password", "*****************************");
-generateFormInput("new", "password", "Your desired password", "*****************************");
-generateFormInput("new_confirm", "password", "Again", "*****************************");
-generateFormInput("btn", "submit", "If you are ready to proceed with this...", "Do it");
+generateFormInput("old", "password", "Your current password", true, "*****************************");
+generateFormInput("new", "password", "Your desired password", true, "*****************************");
+generateFormInput("new_confirm", "password", "Again", true, "*****************************");
+generateFormInput("btn", "submit", "If you are ready to proceed with this...", true, "Do it");
 ?>
     </form>
 
