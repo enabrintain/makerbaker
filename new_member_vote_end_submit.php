@@ -9,6 +9,7 @@ foreach ($board_members as $board_member) {
 	$board_mapping[sanitizeName($board_member)] = $board_member;
 }
 
+// XXX validate pending_member
 $pending_member = $_REQUEST['pending_member'];
 
 // get list of possible responses
@@ -21,6 +22,9 @@ foreach ($vote_options['proposal'] as $response) {
 foreach ($_REQUEST as $key => $value) {
 	if (!strcmp($key, "btn") || !strcmp($key, "pending_member")) {
 		continue;
+	}
+	if (!array_key_exists($key, $board_mapping) || !array_key_exists($value, $responses)) {
+		die("Invalid input: ".$key." => ".$value);
 	}
 	array_push($responses[$value], $board_mapping[$key]);
 }
