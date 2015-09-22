@@ -2,12 +2,39 @@
 $auth = new Authenticator();
 $auth->requireBoardUser();
 
-// XXX add more validation here
-if (!strcmp($_REQUEST['board1'], $_REQUEST['board2'])) {
-	die("Board sponsors must be different");
+function checkRequest($field) {
+	if (array_key_exists($field, $_REQUEST) || trim($_REQUEST[$field]) == "") {
+	        die($field." not valid");
+	}
 }
-if ($_REQUEST['donation'] <= 0) {
-	die("Donation must be positive");
+
+// validate inputs
+$validates = array(
+	"name",
+	"phone",
+	"emergency_name",
+	"emergency_phone",
+	"username",
+	"donation",
+	"email",
+	"board1",
+	"board2",
+	"pronoun");
+foreach ($validates as $validate) {
+	checkRequest($validate);
+}
+if (!strcmp($_REQUEST['board1'], $_REQUEST['board2'])) {
+	die("board sponsors must be different");
+}
+$donation = intval($_REQUEST['donation']);
+if ($donation <= 0) {
+	die("donation must be positive");
+}
+
+$pronoun = $_REQUEST['pronoun'];
+if (!strcmp($pronoun, "other")) {
+	checkRequest("pronoun_other");
+	$pronoun = $_REQUEST['pronoun_other'];
 }
 
 // XXX add member to pending tab
@@ -18,17 +45,12 @@ $add_row_cmd = "addrow.py"
                 . " --emergencyname '" . $_REQUEST["emergency_name"] . "'"
                 . " --emergencynumber " . $_REQUEST["emergency_phone"]
                 . " --user " . $_REQUEST["username"]
-                . " --donation '" . $_REQUEST["donation"] . "'"
+                . " --donation '" . $donation . "'"
                 . " --email " . $_REQUEST["email"]
                 . " --board1 '" . $_REQUEST["board1"] . "'"
                 . " --board2 '" . $_REQUEST["board2"] . "'"
                 . " --infile /tmp/membership.xlsx"
                 . " --outfile /tmp/membership_tweak.xlsx";
-
-$pronoun = $_REQUEST['pronoun'];
-if (!strcmp($pronoun, "other")) {
-	$pronoun = $_REQUEST['pronoun_other'];
-}
 
 $debug = false;
 $mail_sender = '"Makers Local 256 Secretary" <secretary@makerslocal.org>';
