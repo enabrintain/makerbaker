@@ -155,8 +155,9 @@ function generateFormInput($name, $type, $label, $required=false, $input_extra=n
 			} else {
 ?>
 		<input id="<?php echo($type.$name.$option); ?>" type="radio" name="<?php echo($name); ?>" value="<?php echo($option); ?>"<?php echo($required_text) ?>>
-			<label for="<?php echo($type.$name.$option); ?>"><?php echo($option) ?></label>
-			<input class="form-control" type="text" name="<?php echo($name); ?>_other"/>
+			<label for="<?php echo($type.$name.$option); ?>"><?php echo($option) ?>
+				<input class="form-control" type="text" name="<?php echo($name); ?>_other"/>
+			</label>
 		</input><br/>
 <?php
 			}
