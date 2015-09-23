@@ -190,5 +190,17 @@ function sanitizeName($name) {
 }
 
 function getPendingMembers() {
-	return array("Pending Members Placeholder");
+	try {
+		$ldap = new Ldap();
+	} catch (ErrorException $e) {
+		//wrong login
+		die('LDAP connection failed');
+	}
+
+	$results_array = array();
+	$results = $ldap->search("objectclass=Pending");
+	for ($i = 0; $i < $results['count']; $i+=1) {
+		array_push($results_array, $results[$i]);
+	}
+	return $results_array;
 }
