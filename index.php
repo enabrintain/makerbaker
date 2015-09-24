@@ -20,12 +20,11 @@ echo($template["header"]);
 		<h3>Deregister a USB key</h3>
 		-->
 		<h3><a href="logout.php">Log out of this service</a></h3>
+		<h3><a href="members.php">List of Members</a></h3>
 <?php
 if ($auth->isBoardMember()) {
 ?>
-		<h1>Board Info</h1>
-		<h3><a href="members.php">List of Members</a></h3>
-		<h2>Secretarial Tasks</h2>
+		<h1>Secretarial Tasks</h1>
 		<h3><a href="new_member_process.php">Process a new member application</a>:</h3>
 		<ul>
 			<li>adds the member to the pending tab on the member spreadsheet</li>

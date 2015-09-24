@@ -116,6 +116,17 @@ function getMemberList() {
 	return $results_array;
 }
 
+function generateFormSubmit($btn_text=null) {
+?>
+<div class="form-group">
+	<label class="col-sm-4 x control-label"> </label>
+	<div class="col-sm-8">
+		<input type="submit" <?php if ($btn_text != null) echo('value="'.$btn_text.'"'); ?>/>
+	</div>
+</div>
+<?php
+}
+
 function generateFormInput($name, $type, $label, $required=false, $input_extra=null) {
 	$required_text = "";
 	if ($required) {
@@ -127,49 +138,39 @@ function generateFormInput($name, $type, $label, $required=false, $input_extra=n
 	<div class="col-sm-8">
 <?php
 	if (strcmp($type, "radio") && strcmp($type, "select")) {
-		if (!strcmp($type, "submit")) {
-?>
-		<input type="submit" name="<?php echo($name); ?>" <?php if ($input_extra != null) echo('value="'.$input_extra.'"'); ?>/>
-<?php
-		} else if (!strcmp($type, "password")) {
-?>
-		<input class="form-control" type="password" name="<?php echo($name); ?>" <?php if ($input_extra != null) echo('placeholder="'.$input_extra.'"'); ?><?php echo($required_text) ?>/>
-<?php
-		} else if (!strcmp($type, "number")) {
-?>
-		<input class="form-control" type="number" name="<?php echo($name); ?>" <?php if ($input_extra != null) echo('min='.$input_extra); ?><?php echo($required_text) ?> />
-<?php
-		} else {
-?>
-		<input class="form-control" type="<?php echo($type); ?>" name="<?php echo($name); ?>"<?php echo($required_text) ?>/>
-<?php
+		echo('<input class="form-control" type="'.$type.'" name="'.$name.'"');
+		if ($input_extra != null) {
+			if (!strcmp($type, "password")) {
+				echo(' placeholder="'.$input_extra.'"');
+			}
+			if (!strcmp($type, "number")) {
+				echo(' min='.$input_extra);
+			}
 		}
+		echo($required_text." />");
 	} else if (!strcmp($type, "radio")) {
 		foreach ($input_extra as $option) {
-			if (strcmp($option, "other")) {
 ?>
-		<input id="<?php echo($type.$name.$option); ?>" type="radio" name="<?php echo($name); ?>" value="<?php echo($option); ?>"<?php echo($required_text) ?>>
-			<label for="<?php echo($type.$name.$option); ?>"><?php echo($option) ?></label>
-		</input><br/>
+		<input id="<?php echo($type.$name.$option); ?>" type="radio" name="<?php echo($name); ?>" value="<?php echo($option); ?>"<?php echo($required_text); ?>>
+			<label for="<?php echo($type.$name.$option); ?>">
 <?php
-			} else {
+			echo($option);
+			if (!strcmp($option, "other")) {
 ?>
-		<input id="<?php echo($type.$name.$option); ?>" type="radio" name="<?php echo($name); ?>" value="<?php echo($option); ?>"<?php echo($required_text) ?>>
-			<label for="<?php echo($type.$name.$option); ?>"><?php echo($option) ?>
 				<input class="form-control" type="text" name="<?php echo($name); ?>_other"/>
+<?php
+			}
+?>
 			</label>
 		</input><br/>
 <?php
-			}
 		}
 	} else if (!strcmp($type, "select")) {
 ?>
 		<select class="form-control" name="<?php echo($name); ?>">
 <?php
 		foreach ($input_extra as $option) {
-?>
-			<option value="<?php echo($option) ?>"><?php echo($option) ?></option>
-<?php
+			echo('<option value="'.$option.'">'.$option.'</option>');
 		}
 ?>
 		</select>

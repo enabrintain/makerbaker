@@ -52,7 +52,7 @@ $add_row_cmd = "addrow.py"
                 . " --infile /tmp/membership.xlsx"
                 . " --outfile /tmp/membership_tweak.xlsx";
 
-$debug = false;
+$debug = true;
 $mail_sender = '"Makers Local 256 Secretary" <secretary@makerslocal.org>';
 if ($debug) $mail_sender = '"Makers Local 256 Secretary" <root@veighln>';
 $mail_info_recipient = $_REQUEST['email'];

@@ -28,7 +28,7 @@ generateFormInput("email", "email", "Email Address", true);
 generateFormInput("board1", "select", "Board Sponsor #1", true, $board_members);
 generateFormInput("board2", "select", "Board Sponsor #2", true, $board_members);
 generateFormInput("pronoun", "radio", "Desired Pronoun", true, array("his", "her", "other"));
-generateFormInput("btn", "submit", "Submit application", true, "Submit");
+generateFormSubmit("Submit");
 ?>
     </form>
 

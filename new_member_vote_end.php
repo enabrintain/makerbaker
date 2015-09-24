@@ -22,7 +22,7 @@ generateFormInput("pending_member", "select", "Pending Member", true, getPending
 foreach ($board_members as $board_member) {
 	generateFormInput(sanitizeName($board_member), "select", $board_member, true, $vote_options['proposal']);
 }
-generateFormInput("btn", "submit", "Submit vote", true, "Submit");
+generateFormSubmit("Submit");
 ?>
     </form>
 

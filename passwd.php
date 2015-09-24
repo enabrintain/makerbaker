@@ -25,7 +25,7 @@ echo($template["header"]);
 generateFormInput("old", "password", "Your current password", true, "*****************************");
 generateFormInput("new", "password", "Your desired password", true, "*****************************");
 generateFormInput("new_confirm", "password", "Again", true, "*****************************");
-generateFormInput("btn", "submit", "If you are ready to proceed with this...", true, "Do it");
+generateFormSubmit("Do it");
 ?>
     </form>
 
