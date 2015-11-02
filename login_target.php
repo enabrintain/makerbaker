@@ -22,7 +22,7 @@ try {
 $auth = new Authenticator();
 $auth->setCurrentUid($uid);
 $user = $ldap->getUserFromUid($uid);
-$board_group = getBoardObject($ldap);
+$board_group = $ldap->getGroup('board');
 $auth->setBoardMember(false);
 for ($i = 0; $i < $board_group["uniquemember"]["count"]; $i+=1) {
 	$board_member = $board_group["uniquemember"][$i];

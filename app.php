@@ -66,13 +66,6 @@ function complaintVotePassed($responses) {
 	return true;
 }
 
-function getBoardObject($ldap) {
-	$board_filter = "cn=board";
-	$r = $ldap->search($board_filter, "ou=groups,dc=makerslocal,dc=org");
-	if ( $r["count"] > 0 ) { return $r[0]; }
-	return false;
-}
-
 function getNameFromDn($ldap, $dn) {
 	$r = $ldap->search(explode(',', $dn)[0]);
 	if ( $r["count"] == 0 ) { return false; }
@@ -88,7 +81,7 @@ function getBoardList() {
 		die('LDAP connection failed');
 	}
 	$board_members = array();
-	$board_group = getBoardObject($ldap);
+	$board_group = $ldap->getGroup('board');
 	for ($i = 0; $i < $board_group["uniquemember"]["count"]; $i+=1) {
 		$board_member = $board_group["uniquemember"][$i];
 		$member_name = getNameFromDn($ldap, $board_member);

@@ -62,5 +62,13 @@ class Ldap {
 		return $result;
 
 	}
+	
+	function getGroup($cn) {
+		//TODO: should we abstract this more? or just keep returning it raw?
+	        $f = 'cn=' . $cn;
+	        $r = $this->search($f, LdapInfo::group_base_dn);
+	        if ( $r["count"] > 0 ) { return $r[0]; }
+	        return false;
+	}
 
 }
