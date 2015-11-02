@@ -27,6 +27,7 @@ class Authenticator {
 	public function requireBoardUser() {
 		$this->requireAuthenticatedUser();
 		if ( !$this->isBoardMember() ) {
+			//TODO: Need to make better error handling.
 			die('Access denied due to insufficient permissions');
 		}
 	}
