@@ -1,10 +1,17 @@
 <?php require_once("app.php");
 $auth = new Authenticator();
 $auth->requireBoardUser();
-$board_members = getBoardList();
+
+$ldap = new Ldap();
+$board_members = $ldap->getGroupMembers("board");
 if ($board_members === false) {
 	die('Unable to retrieve board members from LDAP');
 }
+$board_members = array_map(function($el){
+	return($el["cn"][0]);
+}, $board_members);
+
+
 echo($template["header"]);
 ?>
 

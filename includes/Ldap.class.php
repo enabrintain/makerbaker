@@ -70,5 +70,15 @@ class Ldap {
 	        if ( $r["count"] > 0 ) { return $r[0]; }
 	        return false;
 	}
+	function getGroupMembers($cn) {
+		$members = array();
+		$group = $this->getGroup($cn);
+		for ($i = 0; $i < $group["uniquemember"]["count"]; $i+=1) {
+			//echo($group["uniquemember"][$i] . "\n");
+			array_push($members, $this->search("uid=*", $group["uniquemember"][$i])[0]); //use the DN as the base DN for the search
+		}
+		//die(var_dump($members));
+		return($members);
+	}
 
 }

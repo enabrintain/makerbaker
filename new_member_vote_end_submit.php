@@ -3,10 +3,10 @@ $auth = new Authenticator();
 $auth->requireBoardUser();
 
 // setup mapping from sanitized name to real name
-$board_members = getBoardList();
+$board_members = $ldap->getGroupMembers("board");
 $board_mapping = array();
 foreach ($board_members as $board_member) {
-	$board_mapping[sanitizeName($board_member)] = $board_member;
+	$board_mapping[sanitizeName($board_member["cn"][0])] = $board_member["cn"][0];
 }
 
 // XXX validate pending_member
