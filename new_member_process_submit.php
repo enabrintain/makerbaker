@@ -52,11 +52,12 @@ $add_row_cmd = "addrow.py"
                 . " --infile /tmp/membership.xlsx"
                 . " --outfile /tmp/membership_tweak.xlsx";
 
-$debug = true;
+$debug = false;
+if ( array_shift(explode('.',gethostname())) == "dev" ) { $debug = true; }
 $mail_sender = '"Makers Local 256 Secretary" <secretary@makerslocal.org>';
-if ($debug) $mail_sender = '"Makers Local 256 Secretary" <root@veighln>';
+if ($debug) $mail_sender = '"Makers Local 256 Secretary" <makerbaker@makerslocal.org>';
 $mail_info_recipient = $_REQUEST['email'];
-if ($debug) $mail_info_recipient = "root@veighln";
+if ($debug) $mail_info_recipient = "makerbaker@makerslocal.org";
 $mail_info_subject = "Makers Local 256 has received your membership application";
 $mail_info_body = "Dear ".$_REQUEST['name'].",
 
@@ -79,7 +80,7 @@ if (mail($mail_info_recipient, $mail_info_subject, $mail_info_body, "From: ".$ma
 
 
 $mail_announce_recipient = "makers@lists.makerslocal.org";
-if ($debug) $mail_announce_recipient = "root@veighln";
+if ($debug) $mail_announce_recipient = "makerbaker@makerslocal.org";
 $mail_announce_subject = "Membership Application - ".$_REQUEST['name'];
 $mail_announce_body = "Hello Makers,
 
