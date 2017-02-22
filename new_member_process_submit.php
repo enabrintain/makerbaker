@@ -3,7 +3,7 @@ $auth = new Authenticator();
 $auth->requireBoardUser();
 
 function checkRequest($field) {
-	if (array_key_exists($field, $_REQUEST) || trim($_REQUEST[$field]) == "") {
+	if ( ! array_key_exists($field, $_REQUEST) || trim($_REQUEST[$field]) == "") {
 	        die($field." not valid");
 	}
 }
