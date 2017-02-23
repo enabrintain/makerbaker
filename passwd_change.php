@@ -7,7 +7,7 @@ $password = $_REQUEST["old"];
 
 //check login
 try {
-	$ldap = new Ldap("uid=" . $uid . "," . LdapInfo::base_dn,  $password);
+	$user_ldap = new Ldap("uid=" . $uid . "," . LdapInfo::base_dn,  $password);
 } catch (ErrorException $e) {
 	//wrong login
 	die(header("Location: ./passwd_done.php?status=loginFailed"));
@@ -21,7 +21,7 @@ if ( $_REQUEST["new"] == "" ) {
 }
 
 //HACK to make LDAP password changeable - users can't change their own passwords atm
-$ldap = new Ldap();
+//using global admin ldap
 
 $ldap->changePassword($uid,$_REQUEST["new"]);
 die(header("Location: ./passwd_done.php?status=success"));

@@ -23,6 +23,9 @@ $config["error_text"] = " Contact the netadmins at netadmin@lists.makerslocal.or
 $config["timeout"] = 60;
 $config["local"] = "10.56."; //if your IP starts with this, you're at the shop
 
+//important objects
+$ldap = new Ldap();
+
 //templates
 $template = array();
 $template["header"] = '<!DOCTYPE html>
@@ -74,12 +77,6 @@ function getNameFromDn($ldap, $dn) {
 }
 
 function getBoardList() {
-	try {
-		$ldap = new Ldap();
-	} catch (ErrorException $e) {
-		//wrong login
-		die('LDAP connection failed');
-	}
 	$board_members = array();
 	$board_group = $ldap->getGroup('board');
 	for ($i = 0; $i < $board_group["uniquemember"]["count"]; $i+=1) {
@@ -94,13 +91,6 @@ function getBoardList() {
 }
 
 function getMemberList() {
-	try {
-		$ldap = new Ldap();
-	} catch (ErrorException $e) {
-		//wrong login
-		die('LDAP connection failed');
-	}
-
 	$results_array = array();
 	$results = $ldap->search("objectclass=Maker");
 	for ($i = 0; $i < $results['count']; $i+=1) {
@@ -184,13 +174,6 @@ function sanitizeName($name) {
 }
 
 function getPendingMembers() {
-	try {
-		$ldap = new Ldap();
-	} catch (ErrorException $e) {
-		//wrong login
-		die('LDAP connection failed');
-	}
-
 	$results_array = array();
 	$results = $ldap->search("objectclass=Pending");
 	for ($i = 0; $i < $results['count']; $i+=1) {

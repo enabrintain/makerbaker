@@ -2,7 +2,6 @@
 $auth = new Authenticator();
 $auth->requireBoardUser();
 
-$ldap = new Ldap();
 $board_members = $ldap->getGroupMembers("board");
 if ($board_members === false) {
 	die('Unable to retrieve board members from LDAP');
