@@ -1,6 +1,10 @@
 <?php @session_start();
 
 class Authenticator {
+
+	public function __construct() {
+		$this->ldap = new Ldap();
+	}
 	
 	public function requireAuthenticatedUser() {
 		if ( !(array_key_exists("valid",$_SESSION) && $_SESSION["valid"]) ) {
@@ -17,16 +21,20 @@ class Authenticator {
 		}
 	}
 
-	public function setBoardMember($isMember) {
-		$_SESSION["board"] = $isMember;
-	}
-	public function isBoardMember() {
-		return $_SESSION["board"];
+	//TODO: Needs to move into ldap class
+	public function isMemberOf($groupCn) {
+		//return true;
+		foreach ($this->ldap->getGroupMembers($groupCn) as $member) {
+			if ( $member["uid"][0] == $_SESSION["uid"] ) {
+				return true;
+			}
+		}
+		return false;
 	}
 
-	public function requireBoardUser() {
+	public function requireMemberOf($groupCn) {
 		$this->requireAuthenticatedUser();
-		if ( !$this->isBoardMember() ) {
+		if ( !$this->isMemberOf($groupCn) ) {
 			//TODO: Need to make better error handling.
 			die('Access denied due to insufficient permissions');
 		}

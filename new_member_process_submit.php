@@ -1,6 +1,6 @@
 <?php require_once("app.php");
 $auth = new Authenticator();
-$auth->requireBoardUser();
+$auth->requireMemberOf('board');
 
 function checkRequest($field) {
 	if ( ! array_key_exists($field, $_REQUEST) || trim($_REQUEST[$field]) == "") {

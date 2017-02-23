@@ -76,7 +76,7 @@ function getNameFromDn($ldap, $dn) {
 	return $user['cn'][0];
 }
 
-function getBoardList() {
+function getBoardList() { //Really returns a list of board member names.
 	$board_members = array();
 	$board_group = $ldap->getGroup('board');
 	for ($i = 0; $i < $board_group["uniquemember"]["count"]; $i+=1) {

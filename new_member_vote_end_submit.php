@@ -1,6 +1,6 @@
 <?php require_once("app.php");
 $auth = new Authenticator();
-$auth->requireBoardUser();
+$auth->requireMemberOf('board');
 
 // setup mapping from sanitized name to real name
 $board_members = $ldap->getGroupMembers("board");

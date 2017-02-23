@@ -1,6 +1,6 @@
 <?php require_once("app.php");
 $auth = new Authenticator();
-$auth->requireBoardUser();
+$auth->requireMemberOf('board');
 echo($template["header"]);
 ?>
 

@@ -24,7 +24,7 @@ th {
 <th>email</th>
 <th>phone</th>
 <?php
-if ($auth->isBoardMember()) {
+if ($auth->isMemberOf('board')) {
 ?>
 <th>usbserial</th>
 <th>nfcid</th>
@@ -46,7 +46,7 @@ foreach ($members as $member) {
 		}
 	}
 	echo("</td>");
-	if ($auth->isBoardMember()) {
+	if ($auth->isMemberOf('board')) {
 		echo("<td>");
 		if (array_key_exists("usbserial", $member)) {
 			for ($i = 0; $i < $member['usbserial']['count']; $i+=1) {

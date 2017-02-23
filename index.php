@@ -22,7 +22,7 @@ echo($template["header"]);
 		<h3><a href="logout.php">Log out of this service</a></h3>
 		<h3><a href="members.php">List of Members</a></h3>
 <?php
-if ($auth->isBoardMember()) {
+if ($auth->isMemberOf('board')) {
 ?>
 		<h1>Secretarial Tasks</h1>
 		<h3><a href="new_member_process.php">Process a new member application</a>:</h3>
