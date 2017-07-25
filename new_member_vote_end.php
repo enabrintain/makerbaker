@@ -18,11 +18,11 @@ echo($template["header"]);
 
     <form class="form-horizontal" action="new_member_vote_end_submit.php" method="POST">
 <?php
-generateFormInput("pending_member", "select", "Pending Member", true, getPendingMembers());
+TemplateEngine::generateFormInput("pending_member", "select", "Pending Member", true, getPendingMembers());
 foreach ($board_members as $board_member) {
-	generateFormInput($board_member["uid"][0], "select", $board_member["cn"][0], true, $vote_options['proposal']);
+	TemplateEngine::generateFormInput($board_member["uid"][0], "select", $board_member["cn"][0], true, $vote_options['proposal']);
 }
-generateFormSubmit("Submit");
+TemplateEngine::generateFormSubmit("Submit");
 ?>
     </form>
 

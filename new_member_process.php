@@ -24,17 +24,17 @@ echo($template["header"]);
 
     <form name="application_form" class="form-horizontal" action="new_member_process_submit.php" method="POST">
 <?php
-generateFormInput("name", "text", "Full Name", true);
-generateFormInput("phone", "tel", "Phone", true);
-generateFormInput("emergency_name", "text", "Emergency Contact Name", true);
-generateFormInput("emergency_phone", "tel", "Emergency Contact Phone", true);
-generateFormInput("username", "text", "Desired Username", true);
-generateFormInput("donation", "number", "Monthly Donation", true, 1);
-generateFormInput("email", "email", "Email Address", true);
-generateFormInput("board1", "select", "Board Sponsor #1", true, $board_members);
-generateFormInput("board2", "select", "Board Sponsor #2", true, $board_members);
-generateFormInput("pronoun", "radio", "Desired Pronoun", true, array("his", "her", "other"));
-generateFormSubmit("Submit");
+TemplateEngine::generateFormInput("name", "text", "Full Name", true);
+TemplateEngine::generateFormInput("phone", "tel", "Phone", true);
+TemplateEngine::generateFormInput("emergency_name", "text", "Emergency Contact Name", true);
+TemplateEngine::generateFormInput("emergency_phone", "tel", "Emergency Contact Phone", true);
+TemplateEngine::generateFormInput("username", "text", "Desired Username", true);
+TemplateEngine::generateFormInput("donation", "number", "Monthly Donation", true, 1);
+TemplateEngine::generateFormInput("email", "email", "Email Address", true);
+TemplateEngine::generateFormInput("board1", "select", "Board Sponsor #1", true, $board_members);
+TemplateEngine::generateFormInput("board2", "select", "Board Sponsor #2", true, $board_members);
+TemplateEngine::generateFormInput("pronoun", "radio", "Desired Pronoun", true, array("his", "her", "other"));
+TemplateEngine::generateFormSubmit("Submit");
 ?>
     </form>
 
