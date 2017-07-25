@@ -55,15 +55,6 @@ $vote_options['formal_complaint'] = array("Yea", "Nay", "Explicit Abstain", "Pas
 //important objects
 $ldap = new Ldap();
 
-function getMemberList() {
-	$results_array = array();
-	$results = $ldap->search("objectclass=Maker");
-	for ($i = 0; $i < $results['count']; $i+=1) {
-		array_push($results_array, $results[$i]);
-	}
-	return $results_array;
-}
-
 function generateFormSubmit($btn_text=null) {
 ?>
 <div class="form-group">

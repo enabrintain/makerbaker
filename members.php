@@ -33,7 +33,7 @@ if ($auth->isMemberOf('board')) {
 ?>
 </tr>
 <?php
-$members = getMemberList();
+$members = $ldap->getGroupMembers("makers");
 foreach ($members as $member) {
 	echo("<tr>");
 	echo("<td>".$member['displayname'][0]."</td>\n");
