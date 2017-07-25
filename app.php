@@ -151,6 +151,7 @@ function generateFormInput($name, $type, $label, $required=false, $input_extra=n
 
 function getPendingMembers() {
 	$results_array = array();
+	$ldap = new Ldap(); //HACK HACK HACK
 	$results = $ldap->search("objectclass=Pending");
 	for ($i = 0; $i < $results['count']; $i+=1) {
 		array_push($results_array, $results[$i]);
