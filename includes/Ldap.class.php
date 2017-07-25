@@ -34,6 +34,7 @@ class Ldap {
 		return false;
 	}
 	public function getUserFromUid($uid) { return $this->getUserFromEmail($uid); }
+	public function getUserFromDn($dn) { return $this->getUserFromUid(explode('=', explode(',', $dn)[0])[1]); } //kill me
 
 	public function changePassword($uid, $pw) {
 

@@ -69,19 +69,12 @@ function complaintVotePassed($responses) {
 	return true;
 }
 
-function getNameFromDn($ldap, $dn) {
-	$r = $ldap->search(explode(',', $dn)[0]);
-	if ( $r["count"] == 0 ) { return false; }
-	$user = $r[0];
-	return $user['cn'][0];
-}
-
 function getBoardList() { //Really returns a list of board member names.
 	$board_members = array();
 	$board_group = $ldap->getGroup('board');
 	for ($i = 0; $i < $board_group["uniquemember"]["count"]; $i+=1) {
 		$board_member = $board_group["uniquemember"][$i];
-		$member_name = getNameFromDn($ldap, $board_member);
+		$member_name = $ldap->getUserFromDn($board_member)['cn'][0];
 		if ($member_name === false) {
 			return false;
 		}
