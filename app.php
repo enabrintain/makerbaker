@@ -55,15 +55,6 @@ $vote_options['formal_complaint'] = array("Yea", "Nay", "Explicit Abstain", "Pas
 //important objects
 $ldap = new Ldap();
 
-function complaintVotePassed($responses) {
-	$num_yea = count($responses['Yea']);
-	$num_nay = count($responses['Nay']);
-	if ($num_nay >= $num_yea) {
-		return false;
-	}
-	return true;
-}
-
 function getBoardList() { //Really returns a list of board member names.
 	$board_members = array();
 	$board_group = $ldap->getGroup('board');

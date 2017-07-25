@@ -9,6 +9,15 @@ class MakerLogic {
 	        }
 	        return true;
 	}
+	public static function complaintVotePassed($responses) {
+		$num_yea = count($responses['Yea']);
+		$num_nay = count($responses['Nay']);
+		if ($num_nay >= $num_yea) {
+			return false;
+		}
+		return true;
+	}
+
 }
 
 ?>
