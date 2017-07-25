@@ -51,15 +51,6 @@ $vote_options = array();
 $vote_options['proposal'] = array("Yea", "Nay", "Explicit Abstain", "Passive Abstain");
 $vote_options['formal_complaint'] = array("Yea", "Nay", "Explicit Abstain", "Passive Abstain", "Forced Abstain");
 
-function proposalVotePassed($responses) {
-	$num_yea = count($responses['Yea']);
-	$num_nay = count($responses['Nay']);
-	if ($num_nay > 1 || $num_nay >= $num_yea) {
-		return false;
-	}
-	return true;
-}
-
 function complaintVotePassed($responses) {
 	$num_yea = count($responses['Yea']);
 	$num_nay = count($responses['Nay']);

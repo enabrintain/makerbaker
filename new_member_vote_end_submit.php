@@ -37,7 +37,7 @@ foreach ($responses as $response => $response_list) {
 	}
 }
 
-$vote_passed = proposalVotePassed($responses);
+$vote_passed = MakerLogic::proposalVotePassed($responses);
 $vote_passed_text = "failed";
 if ($vote_passed) {
 	$vote_passed_text = "passed";
