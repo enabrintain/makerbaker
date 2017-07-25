@@ -23,8 +23,9 @@ $config["error_text"] = " Contact the netadmins at netadmin@lists.makerslocal.or
 $config["timeout"] = 60;
 $config["local"] = "10.56."; //if your IP starts with this, you're at the shop
 
-//important objects
-$ldap = new Ldap();
+//emails
+$config["email_admins"] = "hfuller@pixilic.com";
+$config["email_members"] = "hunterf@makerslocal.org";
 
 //templates
 $template = array();
@@ -50,6 +51,9 @@ $template["footer"] = '';
 $vote_options = array();
 $vote_options['proposal'] = array("Yea", "Nay", "Explicit Abstain", "Passive Abstain");
 $vote_options['formal_complaint'] = array("Yea", "Nay", "Explicit Abstain", "Passive Abstain", "Forced Abstain");
+
+//important objects
+$ldap = new Ldap();
 
 function complaintVotePassed($responses) {
 	$num_yea = count($responses['Yea']);

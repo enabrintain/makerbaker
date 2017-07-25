@@ -50,12 +50,7 @@ The board's votes are as follows:
 Your secretary,
 Kinsey Moore";
 
-echo("Vote end email:\n".$email_title."\n".$email_body."\n\n\n\n");
-
-// select mailing address based on debug mode
-//auto mail_from = Recipient(gmail_username~"@gmail.com", "Makers Local 256 Secretary");
-//auto members_recipients = [Recipient("makers@lists.makerslocal.org", "Members")];
-
+mail($config["email_members"], $email_title, $email_body);
 
 // determine pass/fail
 if ($vote_passed) {
@@ -74,12 +69,11 @@ if ($vote_passed) {
 
 Courtesy of your lazy secretary's automated assistant";
 
-// select mailing address based on debug mode
-//auto admin_recipients = [Recipient("root@makerslocal.org", "Root")];
-	echo("Admin email:\n".$admin_title."\n".$admin_body."\n\n");
+mail($config["email_admins"], $admin_title, $admin_body);
+
 } else {
 	// XXX remove person from pending
 }
 
-//die(header("Location: ./index.php"));
+die(header("Location: ./index.php"));
 ?>
