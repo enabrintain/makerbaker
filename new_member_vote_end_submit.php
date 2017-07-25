@@ -45,9 +45,8 @@ The vote for ".$pending_member."'s membership has concluded and this proposal ha
 
 The board's votes are as follows:
 ".$tally."
-
-".$signage." the application.
-
+"//.$signage." the application.
+."
 Your secretary,
 Kinsey Moore";
 
