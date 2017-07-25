@@ -1,3 +1,5 @@
+<?php
+
 class MakerLogic {
 	public static function proposalVotePassed($responses) {
 	        $num_yea = count($responses['Yea']);
@@ -9,3 +11,4 @@ class MakerLogic {
 	}
 }
 
+?>
