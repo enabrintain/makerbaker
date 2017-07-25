@@ -20,7 +20,7 @@ echo($template["header"]);
 <?php
 generateFormInput("pending_member", "select", "Pending Member", true, getPendingMembers());
 foreach ($board_members as $board_member) {
-	generateFormInput(sanitizeName($board_member["cn"][0]), "select", $board_member["cn"][0], true, $vote_options['proposal']);
+	generateFormInput($board_member["uid"][0], "select", $board_member["cn"][0], true, $vote_options['proposal']);
 }
 generateFormSubmit("Submit");
 ?>

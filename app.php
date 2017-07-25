@@ -149,14 +149,6 @@ function generateFormInput($name, $type, $label, $required=false, $input_extra=n
 <?php
 }
 
-function sanitizeName($name) {
-	$name = str_replace(",", "_", $name);
-	$name = str_replace(" ", "_", $name);
-	$name = str_replace("'", "_", $name);
-	$name = str_replace('"', "_", $name);
-	return $name;
-}
-
 function getPendingMembers() {
 	$results_array = array();
 	$results = $ldap->search("objectclass=Pending");

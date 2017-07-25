@@ -2,13 +2,6 @@
 $auth = new Authenticator();
 $auth->requireMemberOf('board');
 
-// setup mapping from sanitized name to real name
-$board_members = $ldap->getGroupMembers("board");
-$board_mapping = array();
-foreach ($board_members as $board_member) {
-	$board_mapping[sanitizeName($board_member["cn"][0])] = $board_member["cn"][0];
-}
-
 // XXX validate pending_member
 $pending_member = $_REQUEST['pending_member'];
 
@@ -21,12 +14,9 @@ foreach ($vote_options['proposal'] as $response) {
 // collate responses
 foreach ($_REQUEST as $key => $value) {
 	if (!strcmp($key, "btn") || !strcmp($key, "pending_member")) {
-		continue;
+		continue; //Skip the dropdown for pending member. Every other dropdown will be a board member
 	}
-	if (!array_key_exists($key, $board_mapping) || !array_key_exists($value, $responses)) {
-		die("Invalid input: ".$key." => ".$value);
-	}
-	array_push($responses[$value], $board_mapping[$key]);
+	array_push($responses[$value], $ldap->getUserFromUid($key)['cn'][0]);
 }
 
 // render responses
