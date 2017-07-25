@@ -55,12 +55,3 @@ $vote_options['formal_complaint'] = array("Yea", "Nay", "Explicit Abstain", "Pas
 //important objects
 $ldap = new Ldap();
 
-function getPendingMembers() {
-	$results_array = array();
-	$ldap = new Ldap(); //HACK HACK HACK
-	$results = $ldap->search("objectclass=Pending");
-	for ($i = 0; $i < $results['count']; $i+=1) {
-		array_push($results_array, $results[$i]);
-	}
-	return $results_array;
-}

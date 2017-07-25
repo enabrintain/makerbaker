@@ -81,5 +81,12 @@ class Ldap {
 		//die(var_dump($members));
 		return($members);
 	}
-
+	function getObjectClassMembers($class) {
+		$members = array();
+		$results = $this->search("objectclass=" . $class);
+		for ($i = 0; $i < $results['count']; $i+=1) {
+			array_push($members, $results[$i]);
+		}
+		return $members;
+	}
 }

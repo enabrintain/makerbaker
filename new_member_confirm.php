@@ -14,7 +14,11 @@ echo($template["header"]);
 
     <form class="form-horizontal" action="new_member_confirm_submit.php" method="POST">
 <?php
-TemplateEngine::generateFormInput("pending_member", "select", "Pending Member", true, getPendingMembers());
+$pending_members = array_map(function($x) {
+	        return $x['cn'][0];
+}, $ldap->getObjectClassMembers("Friend"));
+
+TemplateEngine::generateFormInput("pending_member", "select", "Pending Member", true, $pending_members);
 TemplateEngine::generateFormSubmit("Confirm");
 ?>
     </form>
