@@ -55,20 +55,6 @@ $vote_options['formal_complaint'] = array("Yea", "Nay", "Explicit Abstain", "Pas
 //important objects
 $ldap = new Ldap();
 
-function getBoardList() { //Really returns a list of board member names.
-	$board_members = array();
-	$board_group = $ldap->getGroup('board');
-	for ($i = 0; $i < $board_group["uniquemember"]["count"]; $i+=1) {
-		$board_member = $board_group["uniquemember"][$i];
-		$member_name = $ldap->getUserFromDn($board_member)['cn'][0];
-		if ($member_name === false) {
-			return false;
-		}
-		array_push($board_members, $member_name);
-	}
-	return $board_members;
-}
-
 function getMemberList() {
 	$results_array = array();
 	$results = $ldap->search("objectclass=Maker");
