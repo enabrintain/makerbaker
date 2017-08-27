@@ -15,17 +15,7 @@ spl_autoload_register(function ($class) {
 	}
 });
 
-//config
-$config = array();
-$config["app_name"] = "Maker Baker";
-$config["app_path"] = ".";
-$config["error_text"] = " Contact the netadmins at netadmin@lists.makerslocal.org for help with this.";
-$config["timeout"] = 60;
-$config["local"] = "10.56."; //if your IP starts with this, you're at the shop
-
-//emails
-$config["email_admins"] = "hfuller@pixilic.com";
-$config["email_members"] = "hunterf@makerslocal.org";
+$config = json_decode(file_get_contents("config.json"));
 
 //templates
 $template = array();

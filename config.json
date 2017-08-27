@@ -1,0 +1,9 @@
+[
+	"app_name": "Maker Baker",
+	"app_path": ".",
+	"error_text": " Contact the netadmins at netadmin@lists.makerslocal.org for help with this.",
+	"timeout": 60,
+	"local": "10.56.",
+	"email_admins": "hfuller@pixilic.com",
+	"email_members": "hunterf@makerslocal.org"
+]
